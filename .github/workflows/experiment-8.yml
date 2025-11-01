@@ -50,13 +50,17 @@ jobs:
           cache: 'npm'
           cache-dependency-path: my-react-project/Experiment-8/package-lock.json
 
-      # Step 3: Install dependencies
+      # Step 3: Install dependencies and ESLint plugins
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          npm install --save-dev @eslint/js eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh globals
 
       # Step 4: Run linting
       - name: Run ESLint
         run: npm run lint
+        env:
+          NODE_OPTIONS: --experimental-vm-modules # Required for ESLint 9.x with ES modules
 
       # Step 5: Build React app
       - name: Build
