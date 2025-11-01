@@ -20,13 +20,11 @@ on:
         default: false
   # Automated triggers
   push:
-    branches:
-      - main
+    branches: [ main, master ]
     paths:
       - 'my-react-project/Experiment-8/**'
   pull_request:
-    branches:
-      - main
+    branches: [ main, master ]
     paths:
       - 'my-react-project/Experiment-8/**'
 
@@ -50,35 +48,34 @@ jobs:
           cache: 'npm'
           cache-dependency-path: my-react-project/Experiment-8/package-lock.json
 
-      # Step 3: Install dependencies and ESLint plugins
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: |
           npm ci
-          npm install --save-dev @eslint/js eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh globals
+          npm install --save-dev @eslint/js eslint-plugin-react-hooks eslint-plugin-react-refresh globals
 
       # Step 4: Run linting
       - name: Run ESLint
-        run: npm run lint
         env:
-          NODE_OPTIONS: --experimental-vm-modules # Required for ESLint 9.x with ES modules
+          NODE_OPTIONS: --experimental-vm-modules
+        run: npm run lint
 
-      # Step 5: Build React app
+      # Step 5: Build the application
       - name: Build
         run: npm run build
+        env:
+          CI: true
 
-      # Step 6: Upload build artifacts
+      # Step 6: Build Docker image
+      - name: Build Docker Image
+        if: success() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        run: docker build -t react-experiment-8 .
+
+      # Step 7: Upload build artifacts
       - name: Upload build artifacts
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: dist
           path: my-react-project/Experiment-8/dist
           retention-days: 7
-
-      # Optional: Deploy to GitHub Pages
-      # Uncomment the following steps if you want to deploy to GitHub Pages
-      # - name: Deploy to GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   if: github.ref == 'refs/heads/main'
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: my-react-project/Experiment-8/dist
