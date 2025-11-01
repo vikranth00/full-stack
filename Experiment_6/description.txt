@@ -1,0 +1,91 @@
+1. FIELD: SVG Drawing Area (<svg id="drawingArea">)
+
+Requirement:
+
+   The SVG canvas must be present and act as the main drawing surface.
+   Users should be able to click, drag, and release the mouse to draw shapes (paths).
+   Drawing must occur only inside the defined SVG boundary.
+
+VALID CASES:
+
+   Mouse down inside SVG → Starts a new blue path.
+   Mouse move (while mouse is down) → Extends the path dynamically with new line segments.
+   Mouse up → Completes the current path, allowing multiple drawings.
+
+INVALID CASES:
+
+   Mouse down outside SVG → No drawing starts.
+   Mouse move outside SVG → No path should be created/extended.
+   If <svg> element is missing → Script throws error, nothing displays.
+
+2. FIELD: Path Creation (<path> elements inside SVG)
+
+Requirement:
+
+   A new <path> element must be dynamically created on each mouse down.
+   Attributes must be applied correctly:
+   stroke="blue"
+   stroke-width="2"
+   fill="none"
+
+VALID CASES:
+
+   Each mouse down → New path is appended inside <svg>.
+   Releasing mouse → Finalizes path; next click starts a new path.
+
+INVALID CASES:
+
+   If attributes are missing → Path may not be visible.
+   If d attribute is empty → Path won’t render.
+
+3. SCRIPT BEHAVIOR: Mouse Event Handling
+
+Requirement:
+
+   mousedown → Initializes drawing and starts path.
+   mousemove → Updates path coordinates dynamically.
+   mouseup → Stops drawing and finalizes the current path.
+
+VALID CASES:
+
+   Holding and dragging mouse → Smooth freehand line appears.
+   Multiple paths can be drawn sequentially without refreshing the page.
+
+INVALID CASES:
+
+   If event listeners are removed → No drawing happens.
+   If currentPath is null when moving mouse → No updates occur (script correctly prevents errors).
+
+CSS STYLING BREAKDOWN
+
+1. ELEMENT: body (Page Layout)
+
+   Purpose: Centers heading and drawing container.
+   Properties & Effects:
+   font-family: Arial, sans-serif; → Clean, modern font.
+   text-align: center; → Centers content horizontally.
+   margin-top: 20px; → Creates spacing at the top.
+
+2. ELEMENT: .container (Drawing Area Wrapper)
+
+   Purpose: Provides styled border around the SVG canvas.
+   Properties & Effects:
+   display: inline-block; → Keeps canvas compact.
+   border: 2px solid black; → Strong black outline.
+   padding: 10px; → Adds spacing around SVG.
+
+3. ELEMENT: svg (Drawing Canvas)
+
+   Purpose: Acts as the interactive drawing surface.
+   Properties & Effects:
+   height: 650px; width: 900px; → Large rectangular canvas.
+   border: 2px solid #555; → Gray outline for visibility.
+   background: #f8f8f8; → Light gray background for contrast.
+   cursor: crosshair; → Indicates drawing interaction.
+
+LEARNING OUTCOMES
+
+1. Learned how to handle mouse events (mousedown, mousemove, mouseup) to draw dynamically.
+2. Understood how to create and manipulate SVG <path> elements using JavaScript.
+3. Applied CSS to style the drawing area, making the canvas user-friendly.
+4. Gained practical experience in linking HTML, CSS, and JS for an interactive drawing tool.

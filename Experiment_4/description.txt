@@ -1,0 +1,34 @@
+LIVE CHARACTER COUNTER TEST CASES & VALIDATIONS
+
+FUNCTIONALITY:
+Real-time character counting that updates instantly as user types or deletes content in textarea.
+
+COMPONENTS BREAKDOWN:
+
+    1.ELEMENT: textarea Purpose: Text input area where users can type content Property: id="txtData" Effect: Provides unique identifier for JavaScript to access the element Property: oninput="showCount()" Effect: Triggers the character counting function on every input change Property: placeholder="Type something here" Effect: Shows helpful text when textarea is empty
+    2.ELEMENT: span#counter Purpose: Displays the live character count Property: id="counter" Effect: Allows JavaScript to update the displayed count Initial Value: 0 Effect: Shows zero characters when page loads
+    3.ELEMENT: h2 (Page Header) Purpose: Displays the main title of the application Content: "Live Character Counter" Effect: Provides clear indication of the tool's purpose
+
+JAVASCRIPT FUNCTION:
+
+    4.FUNCTION: showCount() Purpose: Calculates and updates character count in real-time Process: Gets textarea value using document.getElementById("txtData").value.length Updates counter display using document.getElementById("counter").innerText Executes on every input event
+
+TEST CASES:
+
+    VALID INPUTS:
+            Any text content (letters, numbers, spaces, special characters)
+            Empty textarea (shows 0)
+            Multiple lines of text
+            Copy-paste operations
+
+    EXPECTED BEHAVIOR:
+            It counter updates immediately on typing
+            It Counter decreases when deleting content
+            Accurate count including spaces and special characters
+
+LEARNING OUTCOMES:
+
+How to create live character counter functionality
+Learnt how to use oninput event handling
+How to manipulate Document Object Mode (DOM) elements with JavaScript
+Real-time user interface updates

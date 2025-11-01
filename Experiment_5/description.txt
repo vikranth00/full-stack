@@ -1,0 +1,97 @@
+DYNAMIC PRODUCT FILTER TEST CASES & VALIDATIONS
+
+1. FIELD: Category Dropdown (Filter by Subject)
+
+        Requirement: Must load all categories dynamically from JavaScript. Default option should be All.
+        Dropdown must not be empty.
+        Options displayed should exactly match the categories array.
+
+   VALID CASES:
+
+        Selecting "All" → Displays all products.
+        Selecting "Fruits" → Displays only items from category fruits (Apple, Banana).
+        Selecting "Vegetables" → Displays only items from category vegetables (Carrot, Broccoli).
+        Selecting "Drinks" → Displays only items from category drinks (Orange Juice, Coffee).
+
+   INVALID CASES:
+
+        If categories array is empty → Dropdown will remain blank (failure case).
+        If a category is selected that doesn’t exist in the products list → No products will be displayed.
+
+2. FIELD: Product Display Area (product-list)
+
+    Requirement: Must display product names dynamically based on the selected filter.
+    Each product should appear inside a <div> with class product.
+    If "All" is selected, all products must be listed.
+
+   VALID CASES:
+
+    On selecting Fruits → "Apple", "Banana" appear.
+    On selecting Vegetables → "Carrot", "Broccoli" appear.
+    On selecting Drinks → "Orange Juice", "Coffee" appear.
+
+   INVALID CASES:
+
+    If products array is empty → Product list will display nothing.
+    If displayProducts() is not called → No products will appear even when a category is selected.
+
+3. SCRIPT BEHAVIOR: Dynamic Loading
+
+   Requirement:
+
+    loadCategories() must dynamically create <option> elements for all categories.
+    displayProducts() must clear existing products before rendering new ones.
+    Event listener on <select> should update displayed products immediately after category change.
+
+VALID CASES:
+
+    Page load → All categories and products appear correctly.
+    Changing dropdown → Product list updates dynamically without page reload.
+
+INVALID CASES:
+
+   If document.getElementById("category") or "product-list" is missing → Script will throw error, nothing displays.
+   If event listener is removed → Category change won’t filter products.
+
+CSS STYLING BREAKDOWN
+
+1. ELEMENT: body (Page Layout)
+
+   Purpose: Centers the container both vertically and horizontally, sets background.
+   Property: background-color: rgb(210, 235, 240); → Light aqua background, creates a calm look.
+   Effect: Uses position: absolute; transform: translate(-50%, -50%); to center the container on screen.
+
+2. ELEMENT: .container (Main Wrapper)
+
+   Purpose: Holds heading, dropdown, and product list.
+   Properties & Effects:
+   border: 1px solid #3a6b6b; → Dark teal border.
+   box-shadow: 1px 3px 15px #2f3e46; → Slight shadow for depth.
+   border-radius: 10px; → Rounded corners.
+
+3. ELEMENT: select (Dropdown Styling)
+
+   Purpose: Styles the category dropdown.
+   Properties & Effects:
+   background-color: rgb(200, 230, 230); → Light mint background.
+   border: 2px double teal; → Decorative teal border.
+   border-radius: 8px; → Smooth rounded edges.
+
+4. ELEMENT: .product (Product Item Box)
+
+   Purpose: Styles individual product display.
+   Properties & Effects:
+   background: #6ba8a9; → Muted teal background.
+   border: 1px solid #2f3e46; → Defined dark outline.
+   border-radius: 5px; → Rounded corners for modern look.
+   margin-bottom: 8px; → Spacing between product items.
+
+LEARNING OUTCOMES
+
+1. Learned how to dynamically load categories and products using JavaScript.
+
+2. Understood how addEventListener("change") updates content interactively.
+
+3. Applied CSS to style dropdowns, containers, and product items for a better UI.
+
+4. Gained experience in linking HTML, CSS, and JS together for dynamic filtering functionality.

@@ -1,0 +1,112 @@
+ADMIN DASHBOARD TEST CASES & VALIDATIONS
+1. FIELD: Theme Toggle (Dark Theme)
+Requirement:
+            Checkbox toggle switches the dashboard from light mode to dark mode.
+            Triggered by clicking the “Dark Theme” label linked to the hidden checkbox.
+            Works entirely via CSS variable changes (--bg-header, --bg-footer, --bg-nav).
+
+VALID ACTIONS:
+            Clicking label → Background colors change to dark shades, text turns white.
+            Unchecking (click again) → Reverts to original light theme colors.
+
+INVALID ACTIONS:
+            Clicking anywhere that is not the label or checkbox → No theme change occurs.
+            Removing the id or for attribute → Toggle will no longer function.
+
+2. FIELD: Navigation Sidebar Links
+   Requirement:
+            Links (“Home”, “Users”, “Settings”) should be clickable and lead to the intended pages (currently placeholders #).
+            Sidebar background changes based on theme.
+
+VALID ACTIONS:
+            Clicking “Home” → Navigates to # (placeholder).
+            Clicking “Users” or “Settings” → Navigates to respective placeholder links.
+
+INVALID ACTIONS:
+               Empty href attribute would break navigation.
+               Removing <a> tags would make items non-clickable.
+
+3. FIELD: Layout Display
+   Requirement:
+               Uses CSS Grid to ensure header, sidebar, main content, and footer are properly placed.
+               Responsive height filling entire viewport (100vh).
+
+VALID ACTIONS:
+               Resizing browser window → Layout still maintains grid structure.
+               Dark theme toggle → Layout remains intact while colors change.
+
+INVALID ACTIONS:
+               Removing grid CSS → Layout elements stack vertically instead of arranged grid.
+
+               Changing grid-template values incorrectly → Layout overlaps.
+
+4. PAGE LOADING
+   Requirement:
+           On initial load, the default light theme should be displayed.
+           The checkbox should not be checked by default.
+
+VALID CASE:
+          Light colors load first, text visible, navigation links clickable.
+
+INVALID CASE:
+            If checkbox starts checked → Page loads directly in dark theme.
+
+CSS Styling Breakdown: A Structured Overview
+1. ELEMENT: :root (CSS Variables)
+   Purpose: Stores reusable color values for theme management.
+   Effect: Makes theme toggling possible without repeating color values in multiple selectors.
+
+2. ELEMENT: input[type="checkbox"] (Theme Toggle Checkbox)
+   Purpose: Hides the checkbox, letting the label control it.
+   Effect: Prevents checkbox from visually disrupting layout.
+
+3. ELEMENT: div (Main Layout Container)
+   Purpose: Defines grid structure.
+   Properties & Effects:
+                    display: grid; → Enables grid layout.
+                    grid-template-columns: 160px auto; → Sidebar fixed width, content fills rest.
+                    grid-template-rows: 120px auto 60px; → Header, main content, footer sizing.
+                    height: 100vh; → Fills entire screen height.
+
+4. ELEMENT: header
+   Purpose: Displays title and theme toggle control.
+   Properties & Effects:
+                    Spans both columns in grid.
+                    Uses flexbox to space title and label evenly.
+                    Background color set via CSS variable (--bg-header).
+
+5. ELEMENT: nav.sidebar
+   Purpose: Styles vertical navigation bar.
+   Properties & Effects:
+                   Fixed width (160px).
+                   Background color via --bg-nav.
+                   Padding for spacing around links.
+
+6. ELEMENT: main
+   Purpose: Main content area for dashboard text, tables, or charts.
+   Effect: Monospace font for tech-like look.
+
+7. ELEMENT: footer
+   Purpose: Displays footer message across full width.
+   Properties & Effects:
+                    Background color via --bg-footer.
+                    Spans both columns in grid.
+                    Padding for text comfort.
+
+8. Dark Theme Styling
+Selector: input:checked ~ div
+Purpose: Changes theme when checkbox is checked.
+Effect:
+
+Updates CSS variables to darker colors.
+
+Changes text color to white.
+
+LEARNING OUTCOMES
+How to create a basic admin dashboard layout using HTML5 & CSS Grid.
+
+How to manage themes using CSS variables without JavaScript.
+
+How to toggle between light and dark themes using a hidden checkbox and label.
+
+How to style different page sections consistently and responsively.
