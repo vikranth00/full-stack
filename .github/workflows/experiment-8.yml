@@ -1,6 +1,24 @@
 name: Build and Deploy React App (Experiment-8)
 
 on:
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+        - development
+        - staging
+        - production
+      debug_enabled:
+        description: 'Run the build with debug logging'
+        required: false
+        type: boolean
+        default: false
+  # Automated triggers
   push:
     branches:
       - main
